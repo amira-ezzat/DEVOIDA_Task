@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1046095587693",
+    "project_id": "devoida-task",
+    "storage_bucket": "devoida-task.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1046095587693:android:75dd910005e2e7274b1264",
+        "android_client_info": {
+          "package_name": "com.example.devoida_task"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD4lxE-stGlvRLcfGtxrXCQaOmCbeIrXXM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
