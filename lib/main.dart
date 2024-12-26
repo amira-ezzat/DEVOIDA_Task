@@ -1,41 +1,44 @@
-import 'package:devoida_task/presentation/view/pages/auth/login_page.dart';
-import 'package:devoida_task/presentation/view/pages/auth/register_page.dart';
-import 'package:devoida_task/presentation/viewModel/auth/auth_viewmodel.dart';
-import 'package:devoida_task/presentation/viewModel/recipe_feed_viewmodel.dart';
+import 'package:devoida_task/presentation/modelView/RecipeViewModel.dart';
+import 'package:devoida_task/presentation/modelView/UserViewModel.dart';
+import 'package:devoida_task/presentation/view/page/create.dart';
+import 'package:devoida_task/presentation/view/page/login.dart';
+import 'package:devoida_task/presentation/view/page/register.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
+import 'core/layout/layout.dart';
+import 'core/utils/theme.dart';
 
-import 'domain/repositories/auth_repository.dart';
-import 'domain/repositories/recipe_repository.dart';
 
-void main () async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
+    return MultiProvider(
       providers: [
-        BlocProvider(
-          create: (context) => AuthCubit(AuthRepository()),
-        ),
-        BlocProvider(
-          create: (_) => RecipeViewModel(recipeService: RecipeService()),
-        ),
-
+        ChangeNotifierProvider(create: (_) => UserViewModel()),
+        ChangeNotifierProvider(create: (_) => RecipeViewModel()),
       ],
-      child: const MaterialApp(
+      child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: LoginScreen(),
+        title: 'Recipe Sharing App',
+        theme:lightTheme,
+        darkTheme: darkTheme,
+        themeMode: ThemeMode.light,
+        initialRoute: '/login',
+        routes: {
+          '/login': (context) => LoginScreen(),
+          '/signup': (context) => SignupScreen(),
+          '/feed': (context) => MainScreen(),
+          '/create': (context) => RecipeCreateScreen(),
+
+        },
       ),
     );
-
   }
 }
-
